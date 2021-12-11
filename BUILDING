@@ -1,0 +1,26 @@
+Build Instructions for Myberry
+
+====================================================
+
+(1) Prerequisites
+
+    Only supports JDK 1.8 to compile and run Myberry.
+
+    Myberry utilizes Maven as a distribution management and packaging tool. Version 3.3.1 or later is required.
+    Maven installation and configuration instructions can be found here:
+
+    http://maven.apache.org/run-maven/index.html
+
+
+(2) Run test cases
+
+    Execute the following command in order to compile and run test cases of each components:
+
+    $ mvn test
+
+
+(3) Build distribution packages
+
+    Execute the following command in order to build the tar.gz packages and install JAR into local repository:
+
+    $ mvn -Prelease-all -DskipTests clean install -U

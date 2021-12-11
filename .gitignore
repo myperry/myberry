@@ -1,0 +1,8 @@
+*/.git/*
+.git
+.class
+.project
+.settings
+.classpath
+.myberry
+target
