@@ -1,7 +1,7 @@
 # MyBerry 项目
 
 ![license](https://img.shields.io/badge/license-MIT-blue)
-![license](https://img.shields.io/badge/release-v2.0.0-green)
+![license](https://img.shields.io/badge/release-v2.0.1-green)
 
 MyBerry 是一个分布式的ID构造引擎，能够为企业在生产过程中构建有含义的唯一ID。
 
@@ -29,10 +29,10 @@ MyBerry 是一个分布式的ID构造引擎，能够为企业在生产过程中�
 <dependency>
   <groupId>org.myberry</groupId>
   <artifactId>myberry-client</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
 ## 许可证
 
-Myberry 授予 MIT 许可证. 请参阅 [LICENSE](https://myberry.org/license) 文件了解详情。
+Myberry 授予 MIT 许可证。 请参阅 [LICENSE](https://myberry.org/license) 文件了解详情。
