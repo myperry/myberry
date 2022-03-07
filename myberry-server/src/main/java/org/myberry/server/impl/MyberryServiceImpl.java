@@ -234,39 +234,6 @@ public class MyberryServiceImpl {
     }
   }
 
-  public boolean modifyComponent(NSComponentData nscd) throws Exception {
-    lock.lock();
-    try {
-      NSComponent nsc = (NSComponent) myberryStore.getComponentMap().get(nscd.getKey());
-      nsc.setUpdateTime(new Date().getTime());
-      nsc.setInitNumber(nscd.getInitNumber());
-      nsc.setStepSize(nscd.getStepSize());
-      nsc.setResetType((byte) nscd.getResetType());
-
-      myberryStore.modifyComponent(nsc);
-
-      if (null != haNotifier) {
-        haNotifier.notifyDatabaseUpdate(
-            myberryStore.getSyncData(
-                nsc.getBlockIndex(), nsc.getPhyOffset(), nsc.getComponentLength()));
-      }
-
-      log.info(
-          "{} ++> modify key: [{}], initNumber: [{}], stepSize: [{}], resetType: [{}] success.",
-          this.getServiceName(),
-          nsc.getKey(),
-          nsc.getInitNumber(),
-          nsc.getStepSize(),
-          nsc.getResetType());
-      return true;
-    } catch (Exception e) {
-      log.error("modifyComponent() error: ", e);
-      throw e;
-    } finally {
-      lock.unlock();
-    }
-  }
-
   public ComponentSizeData queryComponentSize() {
     ComponentSizeData componentSizeData = new ComponentSizeData();
     componentSizeData.setSize(myberryStore.getComponentMap().size());

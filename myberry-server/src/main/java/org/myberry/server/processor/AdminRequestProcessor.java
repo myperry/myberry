@@ -99,15 +99,6 @@ public class AdminRequestProcessor implements NettyRequestProcessor {
                   .addComponent(requestHeader.getStructure(), request.getBody());
         }
         break;
-      case RequestCode.UPDATE_COMPONENT:
-        if ((isCluster() && serverController.getHaService().getHaState() == HAState.LEADING)
-            || !isCluster()) {
-          defaultResponse =
-              serverController
-                  .getMyberryService()
-                  .modifyComponent(requestHeader.getStructure(), request.getBody());
-        }
-        break;
       case RequestCode.QUERY_COMPONENT_SIZE:
         defaultResponse = serverController.getMyberryService().queryComponentSize();
         break;

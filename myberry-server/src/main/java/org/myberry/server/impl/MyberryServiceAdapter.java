@@ -113,21 +113,6 @@ public class MyberryServiceAdapter {
             structure, Structure.CR, Structure.NS));
   }
 
-  public DefaultResponse modifyComponent(int structure, byte[] component) {
-    switch (structure) {
-      case Structure.NS:
-        return myberryServiceVerifier.modifyComponent(
-            LightCodec.toObj(component, NSComponentData.class));
-    }
-
-    return new DefaultResponse(
-        ResponseCode.UNKNOWN_STRUCTURE,
-        structure,
-        String.format(
-            "this %d structure is unknown, only support %d, %d",
-            structure, Structure.CR, Structure.NS));
-  }
-
   public DefaultResponse queryComponentSize() {
     return myberryServiceVerifier.queryComponentSize();
   }

@@ -61,40 +61,28 @@ public class NSComponent extends AbstractComponent {
   public static int resetTypeRelativeOffset = 36;
   public static int keyLengthRelativeOffset = 37;
 
-  @sun.misc.Contended("onlyOnce")
   private short componentLength;
 
-  @sun.misc.Contended("onlyOnce")
   private byte structure = (byte) Structure.NS;
 
-  @sun.misc.Contended("trigger")
   private byte status;
 
-  @sun.misc.Contended("onlyOnce")
   private int phyOffset;
 
-  @sun.misc.Contended("onlyOnce")
   private long createTime;
 
-  @sun.misc.Contended("eachTime")
   private long updateTime;
 
-  @sun.misc.Contended("onlyOnce")
   private int initNumber;
 
-  @sun.misc.Contended("eachTime")
   private AtomicInteger currentNumber = new AtomicInteger(0);
 
-  @sun.misc.Contended("trigger")
   private int stepSize;
 
-  @sun.misc.Contended("trigger")
   private byte resetType;
 
-  @sun.misc.Contended("onlyOnce")
   private short keyLength;
 
-  @sun.misc.Contended("onlyOnce")
   private String key;
 
   private final Lock lock = new ReentrantLock();

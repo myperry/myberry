@@ -36,10 +36,8 @@
 package org.myberry.store;
 
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.CountDownLatch;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.myberry.common.structure.Structure;
 
@@ -81,46 +79,5 @@ public class NSComponentTest {
     Assert.assertEquals(stepSize, nsComponent.getStepSize());
     Assert.assertEquals(resetType, nsComponent.getResetType());
     Assert.assertEquals(key, nsComponent.getKey());
-  }
-
-  @Ignore
-  @Test
-  public void test_CPUCacheLinePerformance() throws Exception {
-    final long millis = System.currentTimeMillis();
-    int count = 1_0000_0000;
-    CountDownLatch countDownLatch = new CountDownLatch(2);
-    Thread thread1 =
-        new Thread(
-            new Runnable() {
-              @Override
-              public void run() {
-                for (int i = 0; i < count; i++) {
-                  nsComponent.setUpdateTime(millis);
-                  nsComponent.getCurrentNumber().getAndAdd(stepSize);
-                }
-                countDownLatch.countDown();
-              }
-            });
-
-    Thread thread2 =
-        new Thread(
-            new Runnable() {
-              @Override
-              public void run() {
-                for (int i = 0; i < count; i++) {
-                  nsComponent.getStepSize();
-                  nsComponent.getResetType();
-                }
-                countDownLatch.countDown();
-              }
-            });
-
-    long start = System.nanoTime();
-    thread1.start();
-    thread2.start();
-    countDownLatch.await();
-    long end = System.nanoTime();
-
-    System.out.println((end - start) / 10000);
   }
 }

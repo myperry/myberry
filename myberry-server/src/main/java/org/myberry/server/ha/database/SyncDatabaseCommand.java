@@ -40,8 +40,7 @@ import java.util.Map;
 
 public enum SyncDatabaseCommand {
   CHECKSUM(0),
-  APPEND(1),
-  UPDATE(2);
+  APPEND(1);
 
   private final int code;
 

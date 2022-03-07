@@ -68,10 +68,6 @@ public class MyberryService {
     return myberryServiceAdapter.addComponent(structure, component);
   }
 
-  public DefaultResponse modifyComponent(int structure, byte[] component) {
-    return myberryServiceAdapter.modifyComponent(structure, component);
-  }
-
   public DefaultResponse queryComponentSize() {
     return myberryServiceAdapter.queryComponentSize();
   }

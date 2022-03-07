@@ -194,22 +194,6 @@ public class MyberryServiceVerifierTest {
     Assert.assertEquals(1, nsComponentData.getResetType());
   }
 
-  @Test
-  public void test_g() {
-    NSComponentData nscd = new NSComponentData();
-    nscd.setKey("key2");
-    nscd.setInitNumber(1000);
-    nscd.setStepSize(50);
-    nscd.setResetType(2);
-    DefaultResponse resp1 = myberryServiceVerifier.modifyComponent(nscd);
-    Assert.assertEquals(ResponseCode.SUCCESS, resp1.getRespCode());
-
-    nscd = new NSComponentData();
-    nscd.setKey("key3");
-    DefaultResponse resp2 = myberryServiceVerifier.modifyComponent(nscd);
-    Assert.assertEquals(ResponseCode.KEY_NOT_EXISTED, resp2.getRespCode());
-  }
-
   @AfterClass
   public static void destroy() {
     myberryServiceVerifier.shutdown();

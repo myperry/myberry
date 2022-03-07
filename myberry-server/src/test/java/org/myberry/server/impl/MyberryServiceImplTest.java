@@ -152,25 +152,6 @@ public class MyberryServiceImplTest {
     Assert.assertEquals(1, nscd.getResetType());
   }
 
-  @Test
-  public void test_h() throws Exception {
-    NSComponentData nscd = new NSComponentData();
-    nscd.setKey("key2");
-    nscd.setInitNumber(200);
-    nscd.setStepSize(10);
-    nscd.setResetType(3);
-
-    myberryServiceImpl.modifyComponent(nscd);
-
-    AbstractComponent component = myberryStore.getComponentMap().get("key2");
-    nscd = myberryServiceImpl.queryComponentByKey((NSComponent) component);
-
-    Assert.assertEquals("key2", nscd.getKey());
-    Assert.assertEquals(200, nscd.getInitNumber());
-    Assert.assertEquals(10, nscd.getStepSize());
-    Assert.assertEquals(3, nscd.getResetType());
-  }
-
   @AfterClass
   public static void destroy() {
     converterService.shutdown();

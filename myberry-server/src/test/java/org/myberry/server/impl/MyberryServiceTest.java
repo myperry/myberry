@@ -131,19 +131,6 @@ public class MyberryServiceTest {
     Assert.assertEquals(ResponseCode.SUCCESS, resp2.getRespCode());
   }
 
-  @Test
-  public void test_e() {
-    NSComponentData nscd = new NSComponentData();
-    nscd.setKey("key2");
-    nscd.setInitNumber(1000);
-    nscd.setStepSize(50);
-    nscd.setResetType(2);
-
-    DefaultResponse resp =
-        myberryService.modifyComponent(nscd.getStructure(), LightCodec.toBytes(nscd));
-    Assert.assertEquals(ResponseCode.SUCCESS, resp.getRespCode());
-  }
-
   @AfterClass
   public static void destroy() {
     myberryService.shutdown();

@@ -98,15 +98,6 @@ public class HANotifier {
     delivery(HATransfer.DATABASE, db, syncData);
   }
 
-  public void notifyDatabaseUpdate(byte[] syncData) {
-    Database db = new Database();
-    db.setSid(storeConfig.getMySid());
-    db.setLeader(storeConfig.getMySid());
-    db.setCmd(SyncDatabaseCommand.UPDATE.getCode());
-
-    delivery(HATransfer.DATABASE, db, syncData);
-  }
-
   private void delivery(int transferType, MessageLite messageLite) {
     delivery(transferType, messageLite, null);
   }

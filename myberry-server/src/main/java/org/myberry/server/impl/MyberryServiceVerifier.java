@@ -165,25 +165,6 @@ public class MyberryServiceVerifier {
     }
   }
 
-  public DefaultResponse modifyComponent(NSComponentData nscd) {
-    if (!myberryStore.getComponentMap().containsKey(nscd.getKey())) {
-      DefaultResponse defaultResponse =
-          new DefaultResponse(ResponseCode.KEY_NOT_EXISTED, Structure.NS);
-      defaultResponse.setExt(nscd.getKey().getBytes(StandardCharsets.UTF_8));
-      return defaultResponse;
-    } else {
-      try {
-        myberryServiceImpl.modifyComponent(nscd);
-        DefaultResponse defaultResponse = new DefaultResponse(ResponseCode.SUCCESS, Structure.NS);
-        defaultResponse.setExt(nscd.getKey().getBytes(StandardCharsets.UTF_8));
-        return defaultResponse;
-      } catch (Exception e) {
-        return new DefaultResponse(
-            RemotingSysResponseCode.SYSTEM_ERROR, RemotingHelper.exceptionSimpleDesc(e));
-      }
-    }
-  }
-
   public DefaultResponse queryComponentSize() {
     DefaultResponse defaultResponse = new DefaultResponse(ResponseCode.SUCCESS);
     defaultResponse.setBody(LightCodec.toBytes(myberryServiceImpl.queryComponentSize()));

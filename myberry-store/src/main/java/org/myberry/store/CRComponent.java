@@ -57,37 +57,26 @@ public class CRComponent extends AbstractComponent {
   public static int updateTimeRelativeOffset = 16;
   public static int incrNumberRelativeOffset = 24;
 
-  @sun.misc.Contended("onlyOnce")
   private short componentLength;
 
-  @sun.misc.Contended("onlyOnce")
   private byte structure = (byte) Structure.CR;
 
-  @sun.misc.Contended("trigger")
   private byte status;
 
-  @sun.misc.Contended("onlyOnce")
   private int phyOffset;
 
-  @sun.misc.Contended("onlyOnce")
   private long createTime;
 
-  @sun.misc.Contended("eachTime")
   private long updateTime;
 
-  @sun.misc.Contended("eachTime")
   private AtomicLong incrNumber = new AtomicLong(0);
 
-  @sun.misc.Contended("onlyOnce")
   private short keyLength;
 
-  @sun.misc.Contended("onlyOnce")
   private String key;
 
-  @sun.misc.Contended("onlyOnce")
   private short expressionLength;
 
-  @sun.misc.Contended("onlyOnce")
   private String expression;
 
   private final Lock lock = new ReentrantLock();

@@ -50,7 +50,6 @@ import org.myberry.store.AbstractComponent;
 import org.myberry.store.BlockHeader;
 import org.myberry.store.CRComponent;
 import org.myberry.store.MyberryStore;
-import org.myberry.store.NSComponent;
 import org.myberry.store.SyncParser;
 import org.myberry.store.config.StoreConfig;
 import org.slf4j.Logger;
@@ -268,11 +267,6 @@ public class LearnerDatabaseSynchronizer extends ServiceThread implements HASync
                     }
                     break;
                   }
-                case UPDATE:
-                  {
-                    updateData(haMessage.getData());
-                    break;
-                  }
               }
             }
           }
@@ -373,34 +367,6 @@ public class LearnerDatabaseSynchronizer extends ServiceThread implements HASync
       if (component instanceof CRComponent) {
         CRComponent crc = (CRComponent) component;
         getConverterService().addStruct(crc.getKey(), crc.getExpression());
-      }
-    }
-  }
-
-  private void updateData(byte[] syncData) {
-    List<AbstractComponent> abstractComponents = SyncParser.parseComponent(syncData);
-    for (AbstractComponent component : abstractComponents) {
-      if (component instanceof NSComponent) {
-        NSComponent nsc = (NSComponent) component;
-        AbstractComponent abstractComponent = getMyberryStore().getComponentMap().get(nsc.getKey());
-        if (abstractComponent instanceof NSComponent
-            && nsc.getPhyOffset() == abstractComponent.getPhyOffset()) {
-          getMyberryStore().modifyComponent(nsc);
-
-          NSComponent nsComponent = (NSComponent) abstractComponent;
-          nsComponent.setUpdateTime(nsc.getUpdateTime());
-          nsComponent.setInitNumber(nsc.getInitNumber());
-          nsComponent.setStepSize(nsc.getStepSize());
-          nsComponent.setResetType(nsc.getResetType());
-
-          log.info(
-              "key={}, updateTime={}, initNumber={}, stepSize={}, resetType={} already updated.",
-              nsComponent.getKey(),
-              nsComponent.getUpdateTime(),
-              nsComponent.getInitNumber(),
-              nsComponent.getStepSize(),
-              nsComponent.getResetType());
-        }
       }
     }
   }

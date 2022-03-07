@@ -113,65 +113,6 @@ public class DefaultAdminClientImpl extends AbstractClientImpl {
     return sendResult;
   }
 
-  public SendResult updateComponent(String password, int structure, byte[] componentData)
-      throws RemotingException, InterruptedException, MyberryServerException {
-    return this.updateComponent(
-        password, structure, componentData, defaultAdminClient.getSendMsgTimeout());
-  }
-
-  public SendResult updateComponent(
-      String password, int structure, byte[] componentData, long timeout)
-      throws RemotingException, InterruptedException, MyberryServerException {
-    return this.updateComponentImpl(
-        password, structure, componentData, CommunicationMode.SYNC, null, timeout);
-  }
-
-  private SendResult updateComponentImpl( //
-      String password, //
-      int structure, //
-      byte[] componentData, //
-      final CommunicationMode communicationMode, //
-      final SendCallback sendCallback, //
-      final long timeout //
-      ) throws RemotingException, InterruptedException, MyberryServerException {
-    ManageComponentRequestHeader manageComponentRequestHeader =
-        this.createAdminRequestHeader(password, structure);
-
-    SendResult sendResult = null;
-    switch (communicationMode) {
-      case ASYNC:
-        sendResult =
-            this.getMyberryClientFactory()
-                .getMyberryClientAPIImpl()
-                .updateComponent(
-                    RequestCode.UPDATE_COMPONENT,
-                    defaultAdminClient.getDefaultRouter().getMaintainerAddr(),
-                    componentData,
-                    manageComponentRequestHeader,
-                    timeout,
-                    communicationMode,
-                    sendCallback);
-        break;
-      case ONEWAY:
-      case SYNC:
-        sendResult =
-            this.getMyberryClientFactory()
-                .getMyberryClientAPIImpl()
-                .updateComponent(
-                    RequestCode.UPDATE_COMPONENT,
-                    defaultAdminClient.getDefaultRouter().getMaintainerAddr(),
-                    componentData,
-                    manageComponentRequestHeader,
-                    timeout,
-                    communicationMode);
-        break;
-      default:
-        assert false;
-        break;
-    }
-    return sendResult;
-  }
-
   public SendResult queryComponentSize(String password)
       throws RemotingException, InterruptedException, MyberryServerException {
     return this.queryComponentSize(password, defaultAdminClient.getSendMsgTimeout());

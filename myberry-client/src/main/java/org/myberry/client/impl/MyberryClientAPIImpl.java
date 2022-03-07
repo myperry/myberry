@@ -231,32 +231,6 @@ public class MyberryClientAPIImpl {
     return this.sendKernelImpl(code, addr, request, timeoutMillis, communicationMode, sendCallback);
   }
 
-  public SendResult updateComponent( //
-      final int code, //
-      final String addr, //
-      byte[] componentData, //
-      final CommandCustomHeader requestHeader, //
-      final long timeoutMillis, //
-      final CommunicationMode communicationMode //
-      ) throws RemotingException, InterruptedException, MyberryServerException {
-    return this.updateComponent(
-        code, addr, componentData, requestHeader, timeoutMillis, communicationMode, null);
-  }
-
-  public SendResult updateComponent( //
-      final int code, //
-      final String addr, //
-      byte[] componentData, //
-      final CommandCustomHeader requestHeader, //
-      final long timeoutMillis, //
-      final CommunicationMode communicationMode, //
-      final SendCallback sendCallback //
-      ) throws RemotingException, InterruptedException, MyberryServerException {
-    RemotingCommand request = RemotingCommand.createRequestCommand(code, requestHeader);
-    request.setBody(componentData);
-    return this.sendKernelImpl(code, addr, request, timeoutMillis, communicationMode, sendCallback);
-  }
-
   public SendResult queryComponentSize( //
       final int code, //
       final String addr, //
@@ -519,7 +493,6 @@ public class MyberryClientAPIImpl {
           SendResult sendResult = new SendResult(sendStatus);
           switch (code) {
             case RequestCode.CREATE_COMPONENT:
-            case RequestCode.UPDATE_COMPONENT:
               ManageComponentResponseHeader createResponseHeader =
                   (ManageComponentResponseHeader)
                       response.decodeCommandCustomHeader(ManageComponentResponseHeader.class);

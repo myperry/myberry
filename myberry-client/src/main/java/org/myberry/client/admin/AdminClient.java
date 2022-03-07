@@ -37,7 +37,6 @@ package org.myberry.client.admin;
 
 import org.myberry.client.exception.MyberryServerException;
 import org.myberry.common.Component;
-import org.myberry.common.protocol.body.admin.NSComponentData;
 import org.myberry.remoting.exception.RemotingException;
 
 public interface AdminClient {
@@ -46,12 +45,6 @@ public interface AdminClient {
       throws RemotingException, InterruptedException, MyberryServerException;
 
   SendResult createComponent(Component component, long timeout)
-      throws RemotingException, InterruptedException, MyberryServerException;
-
-  SendResult updateComponent(NSComponentData component)
-      throws RemotingException, InterruptedException, MyberryServerException;
-
-  SendResult updateComponent(NSComponentData component, long timeout)
       throws RemotingException, InterruptedException, MyberryServerException;
 
   SendResult queryComponentSize()

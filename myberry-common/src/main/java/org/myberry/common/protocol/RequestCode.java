@@ -43,17 +43,15 @@ public class RequestCode {
 
   public static final int CREATE_COMPONENT = 100;
 
-  public static final int UPDATE_COMPONENT = 101;
+  public static final int QUERY_COMPONENT_SIZE = 101;
 
-  public static final int QUERY_COMPONENT_SIZE = 102;
+  public static final int QUERY_COMPONENT_BY_KEY = 102;
 
-  public static final int QUERY_COMPONENT_BY_KEY = 103;
+  public static final int QUERY_CLUSTER_LIST = 103;
 
-  public static final int QUERY_CLUSTER_LIST = 104;
+  public static final int KICK_OUT_INVOKER = 104;
 
-  public static final int KICK_OUT_INVOKER = 105;
+  public static final int REMOVE_INVOKER = 105;
 
-  public static final int REMOVE_INVOKER = 106;
-
-  public static final int UPDATE_WEIGHT = 107;
+  public static final int UPDATE_WEIGHT = 106;
 }

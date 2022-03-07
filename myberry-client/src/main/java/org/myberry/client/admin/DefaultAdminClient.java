@@ -116,41 +116,6 @@ public class DefaultAdminClient extends AbstractMyberryClient implements AdminCl
   }
 
   /**
-   * Update NS component.
-   *
-   * @param component NS component to be sent.
-   * @return {@link SendResult} instance to inform senders details of the deliverable, say result of
-   *     the component, {@link SendStatus} indicating component status, etc.
-   * @throws RemotingException if there is any network-tier error.
-   * @throws MyberryServerException if there is any error with broker.
-   * @throws InterruptedException if the sending thread is interrupted.
-   */
-  @Override
-  public SendResult updateComponent(NSComponentData component)
-      throws RemotingException, InterruptedException, MyberryServerException {
-    return this.defaultAdminClientImpl.updateComponent(
-        password, component.getStructure(), component.encode());
-  }
-
-  /**
-   * Same to {@link #updateComponent(NSComponentData)} with send timeout specified in addition.
-   *
-   * @param component NS component to be sent.
-   * @param timeout send timeout.
-   * @return {@link SendResult} instance to inform senders details of the deliverable, say result of
-   *     the component, {@link SendStatus} indicating component status, etc.
-   * @throws RemotingException if there is any network-tier error.
-   * @throws MyberryServerException if there is any error with broker.
-   * @throws InterruptedException if the sending thread is interrupted.
-   */
-  @Override
-  public SendResult updateComponent(NSComponentData component, long timeout)
-      throws RemotingException, InterruptedException, MyberryServerException {
-    return this.defaultAdminClientImpl.updateComponent(
-        password, component.getStructure(), component.encode(), timeout);
-  }
-
-  /**
    * Query component size.
    *
    * @return {@link SendResult} instance to inform senders details of the deliverable, say result of
