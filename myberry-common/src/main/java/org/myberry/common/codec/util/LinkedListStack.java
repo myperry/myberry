@@ -41,7 +41,7 @@ public class LinkedListStack<E> {
 
   private static class Node<E> {
     E item;
-    Node next;
+    Node<E> next;
   }
 
   private Node<E> top = null;
@@ -58,7 +58,7 @@ public class LinkedListStack<E> {
   }
 
   public void push(E item) {
-    Node node = new Node();
+    Node<E> node = new Node<E>();
     node.item = item;
     node.next = top;
     top = node;

@@ -42,11 +42,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import jdk.internal.org.objectweb.asm.ClassWriter;
-import jdk.internal.org.objectweb.asm.FieldVisitor;
-import jdk.internal.org.objectweb.asm.MethodVisitor;
-import jdk.internal.org.objectweb.asm.Opcodes;
-import jdk.internal.org.objectweb.asm.Type;
 import org.myberry.common.codec.MessageLite;
 import org.myberry.common.codec.annotation.SerialField;
 import org.myberry.common.codec.asm.serializer.MessageLiteSerializer;
@@ -54,6 +49,11 @@ import org.myberry.common.codec.exception.UnsupportedCodecTypeException;
 import org.myberry.common.codec.formatter.InOutStream;
 import org.myberry.common.codec.support.FieldType;
 import org.myberry.common.codec.util.NullObjects;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 public class ASMSerializerFactory implements Opcodes {
 
@@ -385,7 +385,7 @@ public class ASMSerializerFactory implements Opcodes {
         INVOKEVIRTUAL,
         Type.getType(clazz).getInternalName(),
         ASMUtils.getFieldGetterMethodName(field),
-        ASMUtils.getMethodDescriptor(Type.getType(field.getType()), null),
+        ASMUtils.getMethodDescriptor(Type.getType(field.getType()), new String[0]),
         false);
     mv.visitVarInsn(ALOAD, 2);
     mv.visitMethodInsn(
@@ -422,7 +422,7 @@ public class ASMSerializerFactory implements Opcodes {
         INVOKEVIRTUAL,
         Type.getType(clazz).getInternalName(),
         ASMUtils.getFieldGetterMethodName(field),
-        ASMUtils.getMethodDescriptor(Type.getType(field.getType()), null),
+        ASMUtils.getMethodDescriptor(Type.getType(field.getType()), new String[0]),
         false);
     mv.visitVarInsn(ALOAD, 2);
     mv.visitMethodInsn(
@@ -446,7 +446,7 @@ public class ASMSerializerFactory implements Opcodes {
         INVOKEVIRTUAL,
         Type.getType(FieldType.class).getInternalName(),
         CLASS_FIELDTYPE_METHOD_NAME_ID,
-        ASMUtils.getMethodDescriptor(Type.getType(int.class), null),
+        ASMUtils.getMethodDescriptor(Type.getType(int.class), new String[0]),
         false);
     mv.visitMethodInsn(
         INVOKEVIRTUAL,
@@ -487,7 +487,7 @@ public class ASMSerializerFactory implements Opcodes {
                 field.getType() != fieldType.getBoxedType()
                     ? fieldType.getType()
                     : fieldType.getBoxedType()),
-            null),
+            new String[0]),
         false);
     if (field.getType() != fieldType.getBoxedType()
         && fieldType.isDifferentBetweenTypeAndBoxedType()) {
@@ -523,7 +523,7 @@ public class ASMSerializerFactory implements Opcodes {
         INVOKEVIRTUAL,
         Type.getType(clazz).getInternalName(),
         ASMUtils.getFieldGetterMethodName(field),
-        ASMUtils.getMethodDescriptor(Type.getType(typeMethodName.getPackedType()), null),
+        ASMUtils.getMethodDescriptor(Type.getType(typeMethodName.getPackedType()), new String[0]),
         false);
     mv.visitMethodInsn(
         INVOKESTATIC,
@@ -566,7 +566,7 @@ public class ASMSerializerFactory implements Opcodes {
           INVOKEINTERFACE,
           Type.getType(typeMethodName.getPackedType()).getInternalName(),
           CLASS_COLLECTION_METHOD_NAME_SIZE,
-          ASMUtils.getMethodDescriptor(Type.getType(int.class), null),
+          ASMUtils.getMethodDescriptor(Type.getType(int.class), new String[0]),
           true);
     }
     mv.visitMethodInsn(

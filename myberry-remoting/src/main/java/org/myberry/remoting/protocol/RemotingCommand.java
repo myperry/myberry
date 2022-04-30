@@ -23,6 +23,7 @@ package org.myberry.remoting.protocol;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -107,11 +108,15 @@ public class RemotingCommand {
 
     if (classHeader != null) {
       try {
-        CommandCustomHeader objectHeader = classHeader.newInstance();
+        CommandCustomHeader objectHeader = classHeader.getDeclaredConstructor().newInstance();
         cmd.customHeader = objectHeader;
       } catch (InstantiationException e) {
         return null;
       } catch (IllegalAccessException e) {
+        return null;
+      } catch (InvocationTargetException e) {
+        return null;
+      } catch (NoSuchMethodException e) {
         return null;
       }
     }
@@ -288,10 +293,14 @@ public class RemotingCommand {
       Class<? extends CommandCustomHeader> classHeader) throws RemotingCommandException {
     CommandCustomHeader objectHeader;
     try {
-      objectHeader = classHeader.newInstance();
+      objectHeader = classHeader.getDeclaredConstructor().newInstance();
     } catch (InstantiationException e) {
       return null;
     } catch (IllegalAccessException e) {
+      return null;
+    } catch (InvocationTargetException e) {
+      return null;
+    } catch (NoSuchMethodException e) {
       return null;
     }
 

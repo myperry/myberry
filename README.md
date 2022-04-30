@@ -1,7 +1,7 @@
 # MyBerry Project
 
 ![license](https://img.shields.io/badge/license-MIT-blue)
-![license](https://img.shields.io/badge/release-v2.1.0-green)
+![license](https://img.shields.io/badge/release-v2.2.0-green)
 
 MyBerry is a distributed ID construction engine that can construct meaningful and unique IDs for
 enterprises in the production process.
@@ -18,7 +18,8 @@ enterprises in the production process.
 
 ## Building
 
-Only supports Java 1.8
+myberry version > 2.1.0 only supports Java 17,
+myberry version <= 2.1.0 only supports Java 8.
 
 ```bash
 # mvn -Prelease-all -DskipTests clean install -U
@@ -31,7 +32,7 @@ Only supports Java 1.8
 <dependency>
   <groupId>org.myberry</groupId>
   <artifactId>myberry-client</artifactId>
-  <version>2.1.0</version>
+  <version>2.2.0</version>
 </dependency>
 ```
 

@@ -11,14 +11,12 @@ fi
 
 export JAVA=$JAVA_HOME/bin/java
 export BASE_DIR=$(dirname $0)/..
-export CLASSPATH=.:${BASE_DIR}/conf:${CLASSPATH}
 
 #===========================================================================================
 # JVM Configuration
 #===========================================================================================
 
 JAVA_OPT="${JAVA_OPT} -server -Xmx128m -Xms128m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=64m"
-JAVA_OPT="${JAVA_OPT} -Djava.ext.dirs=${BASE_DIR}/lib"
-JAVA_OPT="${JAVA_OPT} -cp ${CLASSPATH}"
+JAVA_OPT="${JAVA_OPT} -cp .:$BASE_DIR/conf:$BASE_DIR/lib/*"
 
 $JAVA ${JAVA_OPT} $@

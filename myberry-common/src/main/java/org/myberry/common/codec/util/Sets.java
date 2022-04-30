@@ -40,11 +40,11 @@ import java.util.Set;
 
 public class Sets {
 
-  public static Set newHashSet() {
+  public static <T> Set<T> newHashSet() {
     return newHashSet(0);
   }
 
-  public static Set newHashSet(int capacity) {
-    return new HashSet(capacity);
+  public static <T> Set<T> newHashSet(int capacity) {
+    return new HashSet<T>(capacity);
   }
 }

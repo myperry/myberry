@@ -40,11 +40,11 @@ import java.util.List;
 
 public class Lists {
 
-  public static List newArrayList() {
+  public static <T> List<T> newArrayList() {
     return newArrayList(0);
   }
 
-  public static List newArrayList(int capacity) {
-    return new ArrayList(capacity);
+  public static <T> List<T> newArrayList(int capacity) {
+    return new ArrayList<T>(capacity);
   }
 }

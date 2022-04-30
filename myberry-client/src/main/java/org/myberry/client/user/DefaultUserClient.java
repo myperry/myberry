@@ -134,7 +134,8 @@ public class DefaultUserClient extends AbstractMyberryClient implements UserClie
   }
 
   /**
-   * Same to {@link #pull(java.lang.String, HashMap)} with pull timeout specified in addition.
+   * Same to {@link #pull(java.lang.String, HashMap<String, String>)} with pull timeout specified in
+   * addition.
    *
    * @param key mandatory.
    * @param attachments optional.
@@ -174,7 +175,8 @@ public class DefaultUserClient extends AbstractMyberryClient implements UserClie
   }
 
   /**
-   * Same to {@link #pull(java.lang.String, HashMap, long)} with pull retry specified in addition.
+   * Same to {@link #pull(java.lang.String, HashMap<String, String>, long)} with pull retry
+   * specified in addition.
    *
    * @param key mandatory.
    * @param attachments optional.
@@ -212,7 +214,7 @@ public class DefaultUserClient extends AbstractMyberryClient implements UserClie
   public PullResult pull(String key, String sessionKey)
       throws RemotingException, InterruptedException, MyberryServerException,
           MyberryClientException {
-    return this.pull(key, (HashMap) null, sessionKey);
+    return this.pull(key, (HashMap<String, String>) null, sessionKey);
   }
 
   /**
@@ -254,12 +256,12 @@ public class DefaultUserClient extends AbstractMyberryClient implements UserClie
   public PullResult pull(String key, String sessionKey, long timeout)
       throws RemotingException, InterruptedException, MyberryServerException,
           MyberryClientException {
-    return this.pull(key, (HashMap) null, sessionKey, timeout);
+    return this.pull(key, (HashMap<String, String>) null, sessionKey, timeout);
   }
 
   /**
-   * Same to {@link #pull(java.lang.String, HashMap, java.lang.String)} with pull timeout specified
-   * in addition.
+   * Same to {@link #pull(java.lang.String, HashMap<String, String>, java.lang.String)} with pull
+   * timeout specified in addition.
    *
    * @param key mandatory.
    * @param attachments optional.
@@ -299,12 +301,12 @@ public class DefaultUserClient extends AbstractMyberryClient implements UserClie
   public PullResult pull(String key, String sessionKey, long timeout, int timesRetry)
       throws RemotingException, InterruptedException, MyberryServerException,
           MyberryClientException {
-    return this.pull(key, (HashMap) null, sessionKey, timeout, timesRetry);
+    return this.pull(key, (HashMap<String, String>) null, sessionKey, timeout, timesRetry);
   }
 
   /**
-   * Same to {@link #pull(java.lang.String, HashMap, java.lang.String, long)} with pull retry
-   * specified in addition.
+   * Same to {@link #pull(java.lang.String, HashMap<String, String>, java.lang.String, long)} with
+   * pull retry specified in addition.
    *
    * @param key mandatory.
    * @param attachments optional.
@@ -389,8 +391,8 @@ public class DefaultUserClient extends AbstractMyberryClient implements UserClie
   }
 
   /**
-   * Same to {@link #pull(java.lang.String, HashMap, PullCallback)} with pull timeout specified in
-   * addition.
+   * Same to {@link #pull(java.lang.String, HashMap<String, String>, PullCallback)} with pull
+   * timeout specified in addition.
    *
    * @param key mandatory.
    * @param attachments optional.
@@ -432,8 +434,8 @@ public class DefaultUserClient extends AbstractMyberryClient implements UserClie
   }
 
   /**
-   * Same to {@link #pull(java.lang.String, HashMap, PullCallback, long)} with pull retry specified
-   * in addition.
+   * Same to {@link #pull(java.lang.String, HashMap<String, String>, PullCallback, long)} with pull
+   * retry specified in addition.
    *
    * @param key mandatory.
    * @param attachments optional.
@@ -522,8 +524,8 @@ public class DefaultUserClient extends AbstractMyberryClient implements UserClie
   }
 
   /**
-   * Same to {@link #pull(java.lang.String, HashMap, PullCallback, java.lang.String)} with pull
-   * timeout specified in addition.
+   * Same to {@link #pull(java.lang.String, HashMap<String, String>, PullCallback,
+   * java.lang.String)} with pull timeout specified in addition.
    *
    * @param key mandatory.
    * @param attachments optional.
@@ -572,8 +574,8 @@ public class DefaultUserClient extends AbstractMyberryClient implements UserClie
   }
 
   /**
-   * Same to {@link #pull(java.lang.String, HashMap, PullCallback, java.lang.String, long)} with
-   * pull retry specified in addition.
+   * Same to {@link #pull(java.lang.String, HashMap<String, String>, PullCallback, java.lang.String,
+   * long)} with pull retry specified in addition.
    *
    * @param key mandatory.
    * @param attachments optional.

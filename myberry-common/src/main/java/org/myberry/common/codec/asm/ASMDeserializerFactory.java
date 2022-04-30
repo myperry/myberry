@@ -43,17 +43,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import jdk.internal.org.objectweb.asm.ClassWriter;
-import jdk.internal.org.objectweb.asm.Label;
-import jdk.internal.org.objectweb.asm.MethodVisitor;
-import jdk.internal.org.objectweb.asm.Opcodes;
-import jdk.internal.org.objectweb.asm.Type;
 import org.myberry.common.codec.MessageLite;
 import org.myberry.common.codec.annotation.SerialField;
 import org.myberry.common.codec.asm.deserializer.MessageLiteDeserializer;
 import org.myberry.common.codec.exception.UnsupportedCodecTypeException;
 import org.myberry.common.codec.support.FieldType;
 import org.myberry.common.codec.util.TypeBean;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 public class ASMDeserializerFactory implements Opcodes {
 
@@ -281,7 +281,7 @@ public class ASMDeserializerFactory implements Opcodes {
           INVOKEVIRTUAL,
           Type.getType(fieldType.getBoxedType()).getInternalName(),
           typeNameMap.get(fieldType),
-          ASMUtils.getMethodDescriptor(Type.getType(fieldType.getType()), null),
+          ASMUtils.getMethodDescriptor(Type.getType(fieldType.getType()), new String[0]),
           false);
     }
     mv.visitMethodInsn(

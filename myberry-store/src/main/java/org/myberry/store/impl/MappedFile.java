@@ -39,16 +39,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
+import jdk.internal.ref.Cleaner;
 import org.myberry.store.common.LoggerName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.nio.ch.DirectBuffer;
 
 public class MappedFile {
 
@@ -130,56 +129,23 @@ public class MappedFile {
     }
     if (mappedByteBuffer != null) {
       try {
-        clean(mappedByteBuffer);
+        unmap(mappedByteBuffer);
       } catch (Exception e) {
         log.error("clean mappedByteBuffer Exception: ", e);
       }
     }
   }
 
-  public static void clean(final ByteBuffer buffer) {
-    if (buffer == null || !buffer.isDirect() || buffer.capacity() == 0) return;
-    invoke(invoke(viewed(buffer), "cleaner"), "clean");
-  }
-
-  private static Object invoke(
-      final Object target, final String methodName, final Class<?>... args) {
-    return AccessController.doPrivileged(
-        new PrivilegedAction<Object>() {
-          public Object run() {
-            try {
-              Method method = method(target, methodName, args);
-              method.setAccessible(true);
-              return method.invoke(target);
-            } catch (Exception e) {
-              throw new IllegalStateException(e);
-            }
-          }
-        });
-  }
-
-  private static Method method(Object target, String methodName, Class<?>[] args)
-      throws NoSuchMethodException {
-    try {
-      return target.getClass().getMethod(methodName, args);
-    } catch (NoSuchMethodException e) {
-      return target.getClass().getDeclaredMethod(methodName, args);
+  public static void unmap(ByteBuffer byteBuffer) {
+    if (byteBuffer == null || !byteBuffer.isDirect() || byteBuffer.capacity() == 0) {
+      return;
     }
-  }
+    DirectBuffer directBuffer = (DirectBuffer) byteBuffer;
 
-  private static ByteBuffer viewed(ByteBuffer buffer) {
-    String methodName = "viewedBuffer";
-    Method[] methods = buffer.getClass().getMethods();
-    for (int i = 0; i < methods.length; i++) {
-      if (methods[i].getName().equals("attachment")) {
-        methodName = "attachment";
-        break;
-      }
+    Cleaner cleaner = directBuffer.cleaner();
+    if (cleaner != null) {
+      cleaner.clean();
     }
-
-    ByteBuffer viewedBuffer = (ByteBuffer) invoke(buffer, methodName);
-    if (viewedBuffer == null) return buffer;
-    else return viewed(viewedBuffer);
   }
 
   public FileChannel getFileChannel() {

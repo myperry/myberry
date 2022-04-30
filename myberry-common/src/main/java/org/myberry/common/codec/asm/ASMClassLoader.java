@@ -35,24 +35,11 @@
 */
 package org.myberry.common.codec.asm;
 
-import java.security.PrivilegedAction;
 import org.myberry.common.codec.LightCodec;
 
 public class ASMClassLoader extends ClassLoader {
 
-  private static java.security.ProtectionDomain DOMAIN;
-
-  static {
-    DOMAIN =
-        (java.security.ProtectionDomain)
-            java.security.AccessController.doPrivileged(
-                new PrivilegedAction<Object>() {
-
-                  public Object run() {
-                    return ASMClassLoader.class.getProtectionDomain();
-                  }
-                });
-  }
+  private static java.security.ProtectionDomain DOMAIN = ASMClassLoader.class.getProtectionDomain();
 
   public ASMClassLoader() {
     super(getParentClassLoader());

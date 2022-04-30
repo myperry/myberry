@@ -36,8 +36,8 @@
 package org.myberry.common.codec.asm;
 
 import java.lang.reflect.Field;
-import jdk.internal.org.objectweb.asm.Type;
 import org.myberry.common.codec.support.FieldType;
+import org.objectweb.asm.Type;
 
 public class ASMUtils {
 

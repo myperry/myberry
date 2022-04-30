@@ -92,6 +92,7 @@ public class LightCodec {
     return inOutStream.getWrittenBuffer();
   }
 
+  @SuppressWarnings("unchecked")
   public static <T> T toObj(byte[] src, Class<T> clz) {
     if (null == src || src.length == 0 || null == clz) {
       return null;
